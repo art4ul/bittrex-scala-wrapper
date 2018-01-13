@@ -1,7 +1,7 @@
 # Bittex-scala-wrapper
 Akka-Http wrapper for https://bittrex.com/home/api v1.1 REST Api.
 
-[![Build Status](https://travis-ci.org/art4ul/bittex-scala-client.svg?branch=master)](https://travis-ci.org/art4ul/bittex-scala-client)
+[![Build Status](https://travis-ci.org/art4ul/bittrex-scala-wrapper.svg?branch=master)](https://travis-ci.org/art4ul/bittrex-scala-wrapper)
 
 ## !!! WARNING !!!
 Currently this library is unstable. Development in progress
@@ -9,7 +9,7 @@ Currently this library is unstable. Development in progress
 # Road Map :
 1. ~~Market Api~~
 2. ~~Account Api~~
-3. Unit tests
+3. ~~Unit tests~~
 4. Publish to Maven Central
 5. Examples and description
 
