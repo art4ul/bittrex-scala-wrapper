@@ -1,8 +1,9 @@
 package com.art4ul.bittrex.protocol.v1
 
 import java.time.LocalDateTime
-import com.art4ul.bittrex.protocol._
+
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
+import com.art4ul.bittrex.protocol._
 import spray.json.DefaultJsonProtocol
 
 object AccountApiProtocol extends DefaultJsonProtocol with SprayJsonSupport {
@@ -89,7 +90,7 @@ object AccountApiProtocol extends DefaultJsonProtocol with SprayJsonSupport {
                                   `Sentinel`: String,
                                   `CancelInitiated`: Boolean,
                                   `ImmediateOrCancel`: Boolean,
-                                  `IsConditional` : Boolean)
+                                  `IsConditional`: Boolean)
 
 
   /*

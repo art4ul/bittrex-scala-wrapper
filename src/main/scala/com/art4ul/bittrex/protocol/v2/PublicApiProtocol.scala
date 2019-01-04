@@ -1,8 +1,9 @@
 package com.art4ul.bittrex.protocol.v2
 
 import java.time.LocalDateTime
-import com.art4ul.bittrex.protocol._
+
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
+import com.art4ul.bittrex.protocol._
 import spray.json.DefaultJsonProtocol
 
 object PublicApiProtocol extends DefaultJsonProtocol with SprayJsonSupport {

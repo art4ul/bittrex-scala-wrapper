@@ -4,10 +4,10 @@ import akka.actor.ActorSystem
 import akka.stream.Materializer
 import com.art4ul.bittrex.api.SimpleApiV1
 import com.art4ul.bittrex.protocol.v1.PublicApiProtocol._
-import com.art4ul.bittrex.protocol._
-import scala.concurrent.{ExecutionContext, Future}
 
-class PublicApi(implicit system: ActorSystem, ec: ExecutionContext = null, mat: Materializer) extends SimpleApiV1 {
+import scala.concurrent.Future
+
+class PublicApi(implicit system: ActorSystem, mat: Materializer) extends SimpleApiV1 {
 
   val Prefix = "public"
 

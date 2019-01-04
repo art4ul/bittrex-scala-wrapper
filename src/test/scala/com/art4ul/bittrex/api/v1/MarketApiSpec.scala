@@ -18,7 +18,6 @@ class MarketApiSpec extends TestKit(ActorSystem("MarketApiSpec"))
   with Matchers
   with BeforeAndAfterAll {
 
-  implicit val execContext = system.dispatcher
   implicit val materializer = ActorMaterializer()
 
   class MarketApiMock(val mockedResponse: HttpResponse) extends MarketApi("", "") with MockedRequestSender

@@ -17,7 +17,6 @@ class PublicApiSpec extends TestKit(ActorSystem("PublicApiSpec"))
   with Matchers
   with BeforeAndAfterAll {
 
-  implicit val execContext = system.dispatcher
   implicit val materializer = ActorMaterializer()
 
   class PublicApiMock(val mockedResponse: HttpResponse) extends PublicApi() with MockedRequestSender

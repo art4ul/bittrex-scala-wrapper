@@ -7,9 +7,9 @@ import akka.stream.Materializer
 import com.art4ul.bittrex.api.SimpleApiV2
 import com.art4ul.bittrex.protocol.v2.PublicApiProtocol._
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
-class PublicApi(implicit system: ActorSystem, ec: ExecutionContext = null, mat: Materializer) extends SimpleApiV2 {
+class PublicApi(implicit system: ActorSystem, mat: Materializer) extends SimpleApiV2 {
 
   val Prefix = "pub"
 
@@ -43,7 +43,7 @@ class PublicApi(implicit system: ActorSystem, ec: ExecutionContext = null, mat: 
 
 
   // Unsupported
-//  def getMarketHistory(marketName: String): Future[List[MarketHistory]] =
-//    get[List[MarketHistory]](s"$Prefix/market/GetMarketHistory?marketName=$marketName&_=${System.currentTimeMillis()}")
+  //  def getMarketHistory(marketName: String): Future[List[MarketHistory]] =
+  //    get[List[MarketHistory]](s"$Prefix/market/GetMarketHistory?marketName=$marketName&_=${System.currentTimeMillis()}")
 
 }

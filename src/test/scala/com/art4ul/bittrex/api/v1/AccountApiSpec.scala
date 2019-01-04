@@ -19,7 +19,6 @@ class AccountApiSpec extends TestKit(ActorSystem("AccountApiSpec"))
   with Matchers
   with BeforeAndAfterAll {
 
-  implicit val execContext = system.dispatcher
   implicit val materializer = ActorMaterializer()
 
   class AccountApiMock(val mockedResponse: HttpResponse) extends AccountApi("", "") with MockedRequestSender

@@ -1,10 +1,10 @@
 package com.art4ul.bittrex
 
-import spray.json.{JsString, JsValue, RootJsonFormat}
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import spray.json.DefaultJsonProtocol._
+import spray.json.{JsString, JsValue, RootJsonFormat}
 
 package object protocol {
 
@@ -23,5 +23,6 @@ package object protocol {
   implicit val uuidFormat = jsonFormat1(UuidResponse)
 
   case class UuidResponse(uuid: String)
+
 }
 

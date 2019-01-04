@@ -5,15 +5,13 @@ import akka.http.scaladsl.model.Uri
 import akka.http.scaladsl.model.Uri.Query
 import akka.stream.Materializer
 import com.art4ul.bittrex.api.SecureApiV1
-import com.art4ul.bittrex.protocol.v1.AccountApiProtocol._
 import com.art4ul.bittrex.protocol._
+import com.art4ul.bittrex.protocol.v1.AccountApiProtocol._
 import com.art4ul.bittrex.util.DecimalUtil
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
-class AccountApi(key: String, secret: String)(implicit system: ActorSystem,
-                                              ec: ExecutionContext = null,
-                                              mat: Materializer) extends SecureApiV1(key, secret) {
+class AccountApi(key: String, secret: String)(implicit system: ActorSystem, mat: Materializer) extends SecureApiV1(key, secret) {
 
   private val Prefix = "account"
 

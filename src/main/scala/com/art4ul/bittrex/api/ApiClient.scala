@@ -9,7 +9,7 @@ import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.Materializer
 import spray.json.{DefaultJsonProtocol, JsValue, JsonReader}
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 import scala.reflect.ClassTag
 
 
@@ -20,22 +20,22 @@ object CoreProtocol extends DefaultJsonProtocol with SprayJsonSupport {
   implicit val responseFormat = jsonFormat3(BittrexResponse)
 }
 
-object HttpRequestSender{
+object HttpRequestSender {
   val BittrexUrlV1 = "https://bittrex.com/api/v1.1"
   val BittrexUrlV2 = "https://bittrex.com/Api/v2.0"
 }
 
 trait HttpRequestSender {
 
-  val baseUrl:String
+  val baseUrl: String
 
   protected def sendRequest(uri: Uri)(implicit system: ActorSystem): Future[HttpResponse]
 
-  def targetUrl(uri: Uri):Uri = s"$baseUrl/$uri"
+  def targetUrl(uri: Uri): Uri = s"$baseUrl/$uri"
 }
 
 
-class SimpleRequestSender(val baseUrl:String) extends HttpRequestSender {
+class SimpleRequestSender(val baseUrl: String) extends HttpRequestSender {
 
   override def sendRequest(uri: Uri)(implicit system: ActorSystem): Future[HttpResponse] = {
     val requestUrl = targetUrl(uri)
@@ -45,12 +45,13 @@ class SimpleRequestSender(val baseUrl:String) extends HttpRequestSender {
   }
 }
 
-class SecureRequestSender(val baseUrl:String, key: String, secret: String) extends HttpRequestSender {
+class SecureRequestSender(val baseUrl: String, key: String, secret: String) extends HttpRequestSender {
 
   import com.roundeights.hasher.Implicits._
 
   override def sendRequest(uri: Uri)(implicit system: ActorSystem): Future[HttpResponse] = {
     def nonce = (System.currentTimeMillis() / 1000).toString
+
     val requestUrl = targetUrl(uri).withQuery(("apikey" -> key) +: ("nonce" -> nonce) +: uri.query())
     println(s"url:$requestUrl")
     val apisign = requestUrl.toString().hmac(secret).sha512.hex
@@ -64,9 +65,10 @@ class SecureRequestSender(val baseUrl:String, key: String, secret: String) exten
 }
 
 class SimpleApiV1 extends SimpleRequestSender(HttpRequestSender.BittrexUrlV1) with ResponseHandler
+
 class SimpleApiV2 extends SimpleRequestSender(HttpRequestSender.BittrexUrlV2) with ResponseHandler
 
-class SecureApiV1(key: String, secret: String) extends SecureRequestSender(HttpRequestSender.BittrexUrlV1,key, secret) with ResponseHandler
+class SecureApiV1(key: String, secret: String) extends SecureRequestSender(HttpRequestSender.BittrexUrlV1, key, secret) with ResponseHandler
 
 
 trait ResponseHandler {
@@ -75,9 +77,9 @@ trait ResponseHandler {
   import CoreProtocol._
 
   protected[api] def get[R: ClassTag](url: Uri)(implicit system: ActorSystem,
-                                              ec: ExecutionContext,
-                                              mat: Materializer,
-                                              formatter: JsonReader[R]): Future[R] = {
+                                                mat: Materializer,
+                                                formatter: JsonReader[R]): Future[R] = {
+    implicit val ec = system.dispatcher
     val response = sendRequest(url)
 
     response.flatMap {
